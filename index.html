@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unix POS System v1.1.1 - Pharmacy Management Software</title>
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-light: #eef2ff;
+            --secondary: #2563eb;
+            --dark: #0f172a;
+            --gray: #64748b;
+            --light-bg: #f8fafc;
+            --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--dark);
+            display: flex;
+            justify-content: center;
+            padding: 20px 10px;
+        }
+
+        .container {
+            max-width: 480px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 35px 25px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+
+        /* Header Section */
+        .brand-logo {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--dark);
+            letter-spacing: -1px;
+            margin-bottom: 4px;
+        }
+
+        .brand-logo span {
+            color: var(--primary);
+        }
+
+        .version-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .tagline {
+            color: var(--gray);
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        /* Price Card */
+        .price-card {
+            background: #ffffff;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 24px;
+            padding: 25px 20px;
+            position: relative;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 30px;
+        }
+
+        .price-badge {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--secondary);
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 16px;
+            border-radius: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .price-amount {
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 10px 0 4px 0;
+        }
+
+        .price-amount span {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .divider {
+            height: 1px;
+            background: #f1f5f9;
+            margin: 15px 0;
+        }
+
+        .sub-tag {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .sub-desc {
+            font-size: 12px;
+            color: var(--gray);
+            margin-top: 2px;
+        }
+
+        /* Download Button */
+        .btn-download {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            background: var(--primary);
+            color: white;
+            padding: 16px;
+            border-radius: 16px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 10px 20px rgba(79, 70, 229, 0.3);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin-bottom: 35px;
+        }
+
+        .btn-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(79, 70, 229, 0.4);
+            background: #4338ca;
+        }
+
+        /* Features Section Header */
+        .features-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .features-header .line {
+            height: 1px;
+            background: #e2e8f0;
+            flex-grow: 1;
+        }
+
+        .features-header span {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--gray);
+            letter-spacing: 1.5px;
+        }
+
+        /* Features List */
+        .features-list {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: #ffffff;
+            border: 1px solid #f1f5f9;
+            padding: 16px;
+            border-radius: 18px;
+            text-align: left;
+            box-shadow: var(--card-shadow);
+        }
+
+        .feature-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--primary-light);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .feature-text h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .feature-text p {
+            font-size: 12px;
+            color: var(--gray);
+            margin-top: 2px;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 30px;
+            font-size: 12px;
+            color: var(--gray);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Logo Header -->
+        <h1 class="brand-logo">UNIX <span>POS</span></h1>
+        <div class="version-badge">
+            <i class="fa-solid fa-code-branch"></i> Version 1.1.1
+        </div>
+        <p class="tagline">Powerful Pharmacy & Retail POS Solution.</p>
+
+        <!-- Pricing Card -->
+        <div class="price-card">
+            <div class="price-badge">LIFETIME LICENSE</div>
+            <div class="price-amount"><span>Rs.</span> 1800.00</div>
+            <div class="divider"></div>
+            <div class="sub-tag">
+                <i class="fa-solid fa-circle-check" style="color: #10b981;"></i> STABLE & SECURE SYSTEM
+            </div>
+            <div class="sub-desc">Safe • Offline Database • Fast Billing</div>
+        </div>
+
+        <!-- Download Button -->
+        <a href="Unix_1.1.1.rar" download="UnixSetup.exe" class="btn-download" id="downloadBtn">
+            <i class="fa-solid fa-download"></i> DOWNLOAD NOW
+        </a>
+
+        <!-- Features Divider -->
+        <div class="features-header">
+            <div class="line"></div>
+            <span>KEY FEATURES</span>
+            <div class="line"></div>
+        </div>
+
+        <!-- Features List -->
+        <div class="features-list">
+            
+            <div class="feature-item">
+                <div class="feature-icon"><i class="fa-solid fa-user-shield"></i></div>
+                <div class="feature-text">
+                    <h4>Smart Admin Lock</h4>
+                    <p>Toggle security lock easily for fast owner operations.</p>
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-icon"><i class="fa-solid fa-pills"></i></div>
+                <div class="feature-text">
+                    <h4>Controlled Drug Register</h4>
+                    <p>Track special & controlled medicines with compliance.</p>
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-icon"><i class="fa-solid fa-pills"></i></div>
+                <div class="feature-text">
+                    <h4>Narcotic Drug Manage</h4>
+                    <p>Track special & controlled medicines with compliance.</p>
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-icon"><i class="fa-solid fa-key"></i></div>
+                <div class="feature-text">
+                    <h4>Security Recovery</h4>
+                    <p>Reset admin password via custom security questions.</p>
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
+                <div class="feature-text">
+                    <h4>Stock & Inventory Control</h4>
+                    <p>Real-time stock tracking and low-stock alerts.</p>
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-icon"><i class="fa-solid fa-pause-circle"></i></div>
+                <div class="feature-text">
+                    <h4>Hold & Resume Sales</h4>
+                    <p>Pause current bills and resume sales smoothly anytime.</p>
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-icon"><i class="fa-solid fa-database"></i></div>
+                <div class="feature-text">
+                    <h4>Encrypted SQLite Database</h4>
+                    <p>High performance local data storage for 100% privacy.</p>
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-icon"><i class="fa-solid fa-database"></i></div>
+                <div class="feature-text">
+                    <h4>Backup Database</h4>
+                    <p>High performance local data storage for 100% privacy.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            &copy; 2026 Unix POS Systems. All Rights Reserved.
+        </div>
+    </div>
+
+    <!-- jQuery Integration -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Download Click Tracker / Animation
+            $('#downloadBtn').on('click', function() {
+                let $btn = $(this);
+                $btn.html('<i class="fa-solid fa-spinner fa-spin"></i> DOWNLOADING...');
+                
+                setTimeout(function() {
+                    $btn.html('<i class="fa-solid fa-circle-check"></i> STARTED!');
+                    setTimeout(function() {
+                        $btn.html('<i class="fa-solid fa-download"></i> DOWNLOAD NOW');
+                    }, 3000);
+                }, 1000);
+            });
+        });
+    </script>
+</body>
+</html>
